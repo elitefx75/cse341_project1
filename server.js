@@ -9,9 +9,10 @@ app.use('/', require('./routes'));
 
 mongodb.initDb((err) => {
     if (err) {
-        console.log('Database init error:', err);
+        console.error('Database init error:', err);
+    } else {
+        app.listen(port, () => {
+            console.log(`Server running on http://localhost:${port}`);
+        });
     }
-    app.listen(port, () => {
-        console.log(`Database is listening and node is running on port ${port}`);
-    });
 });
