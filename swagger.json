@@ -13,7 +13,25 @@
   "paths": {
     "/": {
       "get": {
-        "description": "",
+        "summary": "Welcome endpoint",
+        "description": "Returns Hello World",
+        "produces": [
+          "text/plain"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/contacts": {
+      "get": {
+        "summary": "Get all contacts",
+        "description": "Retrieve all contacts",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -24,27 +42,45 @@
         }
       },
       "post": {
-        "description": "",
+        "summary": "Create a contact",
+        "description": "Create a new contact",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
+              "required": [
+                "firstName",
+                "lastName",
+                "email"
+              ],
               "properties": {
                 "firstName": {
+                  "type": "string",
                   "example": "any"
                 },
                 "lastName": {
+                  "type": "string",
                   "example": "any"
                 },
                 "email": {
+                  "type": "string",
                   "example": "any"
                 },
                 "favoriteColor": {
+                  "type": "string",
                   "example": "any"
                 },
                 "birthday": {
+                  "type": "string",
                   "example": "any"
                 }
               }
@@ -61,15 +97,20 @@
         }
       }
     },
-    "/{id}": {
+    "/contacts/{id}": {
       "get": {
-        "description": "",
+        "summary": "Get a contact by ID",
+        "description": "Retrieve a single contact by ID",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "default": "1"
           }
         ],
         "responses": {
@@ -82,33 +123,47 @@
         }
       },
       "put": {
-        "description": "",
+        "summary": "Update a contact by ID",
+        "description": "Update an existing contact by ID",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "default": "1"
           },
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "firstName": {
+                  "type": "string",
                   "example": "any"
                 },
                 "lastName": {
+                  "type": "string",
                   "example": "any"
                 },
                 "email": {
+                  "type": "string",
                   "example": "any"
                 },
                 "favoriteColor": {
+                  "type": "string",
                   "example": "any"
                 },
                 "birthday": {
+                  "type": "string",
                   "example": "any"
                 }
               }
@@ -125,18 +180,26 @@
         }
       },
       "delete": {
-        "description": "",
+        "summary": "Delete a contact by ID",
+        "description": "Delete an existing contact by ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "default": "1"
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
